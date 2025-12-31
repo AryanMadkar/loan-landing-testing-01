@@ -1,0 +1,117 @@
+import { Minus, Plus } from "lucide-react";
+
+const categories = [
+  { id: "admission-support", label: "ADMISSION SUPPORT" },
+  { id: "loan-assistance", label: "LOAN ASSISTANCE" },
+  { id: "visa-assistance", label: "VISA ASSISTANCE" },
+  { id: "money-transfer", label: "MONEY TRANSFER" },
+];
+
+const FaqSection = () => {
+  // Static data - first category active, first FAQ open
+  const activeCategory = "admission-support";
+  const openItem = 0;
+
+  const faqs = [
+    {
+      question: "How do I apply for admission support?",
+      answer:
+        "Submit your university offer letter, academic transcripts, and SOP through our portal. Our experts review and strengthen your application within 48 hours.",
+      category: "admission-support",
+    },
+    {
+      question: "What documents are needed for admission?",
+      answer:
+        "Offer letter, transcripts (10th/12th/graduation), SOP, LORs, passport, financial proof, and English proficiency scores (IELTS/TOEFL).",
+      category: "admission-support",
+    },
+    {
+      question: "What is the minimum loan amount?",
+      answer:
+        "₹5 lakhs for Indian universities, $10,000 for abroad. Maximum up to ₹1.5 crore or full course fees based on your profile.",
+      category: "loan-assistance",
+    },
+    {
+      question: "How long does loan approval take?",
+      answer:
+        "24-72 hours after KYC verification. We compare rates from 20+ banks including SBI, HDFC, Axis, ICICI.",
+      category: "loan-assistance",
+    },
+  ];
+
+  const filteredFaqs = faqs.filter((faq) => faq.category === activeCategory);
+
+  return (
+    <div className="w-full bg-white">
+      <div className="px-4  md:max-w-4xl md:mx-auto md:px-6 md:py-16">
+        <div className="text-center mb-8 md:mb-12 mt-12">
+          <h2 className="text-[32px] font-bold md:text-4xl mb-3 md:mb-4 text-black leading-tight">
+            Frequently <span className="text-[#45267F]/60 italic">Asked</span>{" "}
+            Questions
+          </h2>
+          <p className="text-[#8E8E8E] text-base text-[18px] md:text-lg">
+            We have got you covered.
+          </p>
+        </div>
+
+        <div className="mb-8 md:mb-12">
+          <div className="flex gap-2 md:flex-wrap md:justify-center md:gap-4 overflow-x-auto pb-2 hide-scrollbar">
+            {categories.map((category) => (
+              <button
+                key={category.id}
+                className={`px-4 py-2 text-[16px] bg-[#45267f17] md:px-5 md:py-3 rounded-md border transition-all duration-200 text-sm md:text-base whitespace-nowrap flex-shrink-0 text-[#45267F] cursor-pointer ${
+                  category.id === activeCategory
+                    ? "border-purple-500 bg-[#45267F17]/9 text-purple-700"
+                    : "border-gray-300 bg-[#45267F0A] text-[#1A1A1A]/70 hover:border-purple-500 hover:text-purple-700"
+                }`}
+              >
+                {category.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="space-y-3 md:space-y-4">
+          {filteredFaqs.map((item, index) => {
+            const isOpen = openItem === index;
+            return (
+              <div
+                key={index}
+                className="border border-gray-200 bg-[#F7F7FB] rounded-lg overflow-hidden"
+              >
+                <button className="w-full px-4 py-4 md:px-6 md:py-5 text-left flex items-start justify-between hover:bg-gray-50/50 transition-colors duration-200 cursor-pointer">
+                  <span className="text-[#363636] text-[18px] font-medium text-base md:text-lg pr-3 md:pr-4 leading-tight md:leading-[21px] md:tracking-[-1px] capitalize">
+                    {item.question}
+                  </span>
+                  <div className="flex-shrink-0 mt-1 md:mt-0">
+                    {isOpen ? (
+                      <Minus className="w-5 h-5 text-[#6F25CE]" />
+                    ) : (
+                      <Plus className="w-5 h-5 text-[#6F25CE]" />
+                    )}
+                  </div>
+                </button>
+
+                <div
+                  className={`grid transition-all duration-500 ease-in-out ${
+                    isOpen
+                      ? "grid-rows-[1fr] opacity-100 pb-4 md:pb-5"
+                      : "grid-rows-[0fr] opacity-0 pb-0"
+                  } px-4 md:px-6`}
+                >
+                  <div className="overflow-hidden">
+                    <p className="text-[#2B2B2B]/60 leading-[20px] font-normal text-[16px] text-sm md:text-base">
+                      {item.answer}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default FaqSection;
