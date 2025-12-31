@@ -1,12 +1,19 @@
-import Footer from "../components/common/Footer";
-import ContactSection from "../components/ContactSection";
-import FaqSection from "../components/FaqSection";
+import dynamic from "next/dynamic";
 import HeroSection from "../components/HeroSection";
-import ServicesSection from "../components/ServicesSection";
-import StudentTrustSection from "../components/StudentTrustSection";
-import TestimonialCarousel from "../components/Testimonial";
-import WhatsAppButton from "../components/WhatsAppButton";
-import WhyRemitoutSection from "../components/Whyremitout";
+
+// Dynamically import below-the-fold components
+const ContactSection = dynamic(() => import("../components/ContactSection"));
+const FaqSection = dynamic(() => import("../components/FaqSection"));
+const ServicesSection = dynamic(() => import("../components/ServicesSection"));
+const StudentTrustSection = dynamic(() =>
+  import("../components/StudentTrustSection")
+);
+const TestimonialCarousel = dynamic(() => import("../components/Testimonial"));
+const WhatsAppButton = dynamic(() => import("../components/WhatsAppButton"));
+const WhyRemitoutSection = dynamic(() => import("../components/Whyremitout"), {
+  loading: () => <div className="h-96" />, // Optional: placeholder to reduce layout shift
+});
+const Footer = dynamic(() => import("../components/common/Footer"));
 
 export default function Home() {
   return (
@@ -18,7 +25,7 @@ export default function Home() {
       <TestimonialCarousel />
       <FaqSection />
       <ContactSection />
-      <Footer/>
+      <Footer />
       <WhatsAppButton />
     </div>
   );

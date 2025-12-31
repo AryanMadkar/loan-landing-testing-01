@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  /* config options here */
+  output: "export", // Enable static export
   reactCompiler: true,
   reactStrictMode: true,
   poweredByHeader: false,
@@ -9,6 +9,7 @@ const nextConfig = {
   },
 
   images: {
+    unoptimized: true, // Required for static export
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 60,
   },
