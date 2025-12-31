@@ -1,5 +1,6 @@
 import "./globals.css";
 import LoadingWrapper from "../components/LoadingWrapper";
+import { LoadingProvider } from "../context/LoadingContext";
 
 export const metadata = {
   metadataBase: new URL("https://loan.remitout.com"), // ← FIX: Added this line
@@ -37,7 +38,9 @@ export default function RootLayout({ children }) {
         <link rel="dns-prefetch" href="https://loan.remitout.com" />
       </head>
       <body>
-        <LoadingWrapper>{children}</LoadingWrapper>
+        <LoadingProvider>
+          <LoadingWrapper>{children}</LoadingWrapper>
+        </LoadingProvider>
       </body>
     </html>
   );

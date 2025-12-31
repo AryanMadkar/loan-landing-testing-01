@@ -1,25 +1,47 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: "export", // Enable static export
-  reactCompiler: true,
+  /* ===============================
+     CORE MODE
+  =============================== */
+  output: "export",
+  trailingSlash: true,
+
+  /* ===============================
+     REACT & BUILD
+  =============================== */
   reactStrictMode: true,
+  reactCompiler: true,
+  swcMinify: true,
+
   poweredByHeader: false,
+  productionBrowserSourceMaps: false,
+
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
+    reactRemoveProperties: process.env.NODE_ENV === "production",
   },
 
+  /* ===============================
+     IMAGES (STATIC EXPORT SAFE)
+  =============================== */
   images: {
-    unoptimized: true, // Required for static export
+    unoptimized: true,
     formats: ["image/avif", "image/webp"],
-    minimumCacheTTL: 60,
+    minimumCacheTTL: 31536000,
   },
 
+  /* ===============================
+     CSS & RUNTIME
+  =============================== */
   experimental: {
     optimizeCss: true,
-    serverActions: {
-      bodySizeLimit: "2mb",
-    },
+    scrollRestoration: true,
   },
+
+  /* ===============================
+     TURBOPACK (EXPLICIT, SILENCES ERROR)
+  =============================== */
+  turbopack: {},
 };
 
 export default nextConfig;

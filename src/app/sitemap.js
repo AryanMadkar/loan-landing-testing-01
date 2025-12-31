@@ -1,4 +1,6 @@
+export const dynamic = "force-static";
 const BASE_URL = "https://loan.remitout.com";
+
 const now = new Date();
 
 export default function sitemap() {
