@@ -11,8 +11,6 @@ const nextConfig = {
   =============================== */
   reactStrictMode: true,
   reactCompiler: true,
-  swcMinify: true,
-
   poweredByHeader: false,
   productionBrowserSourceMaps: false,
 
