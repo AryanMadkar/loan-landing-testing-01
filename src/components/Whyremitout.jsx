@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { FaAward } from "react-icons/fa";
 import features1 from "../../public/our-service-4.png";
+import { MdAdsClick } from "react-icons/md";
 
 const WhyRemitoutSection = () => {
   return (
@@ -66,12 +67,7 @@ const WhyRemitoutSection = () => {
 
               <div className="flex items-center gap-4 w-full md:w-1/2">
                 <div className="w-18 h-18 rounded-xl overflow-hidden flex items-center justify-center bg-white">
-                  <Image
-                    src="/images/cta-icon.png"
-                    alt="CTA Icon"
-                    width={48}
-                    height={48}
-                  />
+                  <MdAdsClick className="text-orange-500 text-4xl" />
                 </div>
 
                 <div>

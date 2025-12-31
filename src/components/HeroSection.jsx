@@ -22,51 +22,6 @@ import Navbar from "./common/Navbar";
 const HeroSection = () => {
   return (
     <div className="min-h-screen bg-white relative">
-      <div className="bg-[#3B1D6E] text-white text-sm border-b border-white/20 py-4">
-        <div className="max-w-8xl flex justify-between md:items-center h-10 p-4 md:px-[131px]">
-          <div className="flex gap-4 font-poppins text-sm md:text-lg">
-            <div className="flex gap-1">
-              <FaPhone />
-              <a href={`tel:${""}`} className="hover:underline">
-                {""}
-              </a>
-            </div>
-            <span className="hidden sm:inline-block text-white/40">|</span>
-            <div className="hidden sm:flex items-center gap-1">
-              <IoMdMail />
-              <a
-                href={`https://mail.google.com/mail/?view=cm&to=${""}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:underline"
-              >
-                {""}
-              </a>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-4 mt-2 sm:mt-0">
-            <div className="hidden sm:flex items-center gap-2 font-poppins text-lg">
-              <a href="/contact-us" className="underline hover:text-gray-200">
-                Contact Us
-              </a>
-
-              <span className="text-white/40">|</span>
-              <div className="flex items-center gap-3">
-                <a href="#" className="hover:text-gray-300">
-                  <FaFacebookF />
-                </a>
-                <a href="#" className="hover:text-gray-300">
-                  <FaTwitter />
-                </a>
-                <a href="#" className="hover:text-gray-300">
-                  <FaInstagram />
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
       <Navbar />
 
       <section className="px-4 py-5 md:px-[131px]">
