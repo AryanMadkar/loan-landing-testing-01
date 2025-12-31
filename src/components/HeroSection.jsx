@@ -52,7 +52,7 @@ const HeroSection = () => {
               </p>
             </div>
 
-            <Link href="/contact-us">
+            <Link href="/pages/contact-us">
               <button className="bg-[#FF7A00] text-white text-lg font-semibold px-20 py-5 cursor-pointer hover:bg-[#FF7A00]/90 md:rounded-none w-full md:w-[60%] shadow-lg transition-all duration-200">
                 Get Started
               </button>

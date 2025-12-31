@@ -109,14 +109,14 @@ export default function ContactSection() {
                 >
                   I agree to the{" "}
                   <Link
-                    href="/terms"
+                    href="/terms-of-use"
                     className="text-[#FF7A00] hover:text-[#FF7A00]/80 font-semibold underline underline-offset-2 transition-colors"
                   >
                     Terms of Service
                   </Link>{" "}
                   and{" "}
                   <Link
-                    href="/privacy"
+                    href="/privacy-policy"
                     className="text-[#FF7A00] hover:text-[#FF7A00]/80 font-semibold underline underline-offset-2 transition-colors"
                   >
                     Privacy Policy

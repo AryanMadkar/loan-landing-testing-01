@@ -81,7 +81,7 @@ const WhyRemitoutSection = () => {
               </div>
 
               <a
-                href="#"
+                href="/pages/contact-us"
                 className="w-full md:w-auto bg-[#FF7A00] text-white px-8 py-3 rounded-md font-semibold text-lg md:text-2xl text-center"
               >
                 Get Started

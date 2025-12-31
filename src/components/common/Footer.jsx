@@ -27,16 +27,16 @@ export default function Footer() {
           <div>
             <h3 className="text-base md:text-lg font-bold mb-3 md:mb-4">Company</h3>
             <nav className="space-y-2">
-              <Link href="/about" className="block text-sm md:text-base text-gray-300 hover:text-[#FF7A00] transition-colors">
+              <Link href="/pages/about" className="block text-sm md:text-base text-gray-300 hover:text-[#FF7A00] transition-colors">
                 About Us
               </Link>
-              <Link href="/careers" className="block text-sm md:text-base text-gray-300 hover:text-[#FF7A00] transition-colors">
+              <Link href="/pages/careers" className="block text-sm md:text-base text-gray-300 hover:text-[#FF7A00] transition-colors">
                 Careers
               </Link>
-              <Link href="/blog" className="block text-sm md:text-base text-gray-300 hover:text-[#FF7A00] transition-colors">
+              <Link href="/pages/blog" className="block text-sm md:text-base text-gray-300 hover:text-[#FF7A00] transition-colors">
                 Blog
               </Link>
-              <Link href="/contact" className="block text-sm md:text-base text-gray-300 hover:text-[#FF7A00] transition-colors">
+              <Link href="/pages/contact" className="block text-sm md:text-base text-gray-300 hover:text-[#FF7A00] transition-colors">
                 Contact
               </Link>
             </nav>
@@ -46,16 +46,16 @@ export default function Footer() {
           <div>
             <h3 className="text-base md:text-lg font-bold mb-3 md:mb-4">Products</h3>
             <nav className="space-y-2">
-              <Link href="/loans" className="block text-sm md:text-base text-gray-300 hover:text-[#FF7A00] transition-colors">
+              <Link href="/pages/loans" className="block text-sm md:text-base text-gray-300 hover:text-[#FF7A00] transition-colors">
                 Loans
               </Link>
-              <Link href="/transfers" className="block text-sm md:text-base text-gray-300 hover:text-[#FF7A00] transition-colors">
+              <Link href="/pages/transfers" className="block text-sm md:text-base text-gray-300 hover:text-[#FF7A00] transition-colors">
                 Transfers
               </Link>
-              <Link href="/education" className="block text-sm md:text-base text-gray-300 hover:text-[#FF7A00] transition-colors">
+              <Link href="/pages/education" className="block text-sm md:text-base text-gray-300 hover:text-[#FF7A00] transition-colors">
                 Education
               </Link>
-              <Link href="/business" className="block text-sm md:text-base text-gray-300 hover:text-[#FF7A00] transition-colors">
+              <Link href="/pages/business" className="block text-sm md:text-base text-gray-300 hover:text-[#FF7A00] transition-colors">
                 Business
               </Link>
             </nav>
@@ -65,16 +65,16 @@ export default function Footer() {
           <div>
             <h3 className="text-base md:text-lg font-bold mb-3 md:mb-4">Support</h3>
             <nav className="space-y-2">
-              <Link href="/help" className="block text-sm md:text-base text-gray-300 hover:text-[#FF7A00] transition-colors">
+              <Link href="/pages/help" className="block text-sm md:text-base text-gray-300 hover:text-[#FF7A00] transition-colors">
                 Help Center
               </Link>
-              <Link href="/faq" className="block text-sm md:text-base text-gray-300 hover:text-[#FF7A00] transition-colors">
+              <Link href="/pages/faq" className="block text-sm md:text-base text-gray-300 hover:text-[#FF7A00] transition-colors">
                 FAQ
               </Link>
-              <Link href="/privacy" className="block text-sm md:text-base text-gray-300 hover:text-[#FF7A00] transition-colors">
+              <Link href="/privacy-policy" className="block text-sm md:text-base text-gray-300 hover:text-[#FF7A00] transition-colors">
                 Privacy
               </Link>
-              <Link href="/terms" className="block text-sm md:text-base text-gray-300 hover:text-[#FF7A00] transition-colors">
+              <Link href="/terms-of-use" className="block text-sm md:text-base text-gray-300 hover:text-[#FF7A00] transition-colors">
                 Terms
               </Link>
             </nav>
