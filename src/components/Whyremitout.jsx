@@ -29,7 +29,7 @@ const WhyRemitoutSection = () => {
             src={features1}
             alt="Trusted and Secure"
             fill
-            sizes="(min-width: 768px) 400px, 100vw"
+            sizes="(width: 768px) 400px, 100vw"
             className="object-cover object-top"
           />
 
