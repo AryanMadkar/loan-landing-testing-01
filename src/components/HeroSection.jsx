@@ -112,7 +112,7 @@ const HeroSection = () => {
                 alt="Education loan comparison"
                 width={600}
                 height={400}
-                quality={70}
+                quality={75}
                 loading="eager"
                 style={{ maxWidth: "100%", height: "auto" }}
                 className="object-cover w-full h-full"
