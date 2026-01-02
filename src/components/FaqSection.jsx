@@ -9,40 +9,11 @@ import { useGSAP } from "@gsap/react";
 gsap.registerPlugin(ScrollTrigger);
 
 const categories = [
-  { id: "admission-support", label: "Admission Support" },
   { id: "loan-assistance", label: "Loan Assistance" },
-  { id: "visa-assistance", label: "Visa Assistance" },
   { id: "money-transfer", label: "Money Transfer" },
 ];
 
 const allFaqs = {
-  "admission-support": [
-    {
-      question: "How do I apply for admission support?",
-      answer:
-        "Submit your university offer letter, academic transcripts, and SOP through our portal. Our experts review and strengthen your application within 48 hours.",
-    },
-    {
-      question: "What documents are needed for admission?",
-      answer:
-        "Offer letter, transcripts (10th/12th/graduation), SOP, LORs, passport, financial proof, and English proficiency scores (IELTS/TOEFL).",
-    },
-    {
-      question: "Do you help with university selection?",
-      answer:
-        "Yes! Our counselors analyze your profile, budget, and career goals to recommend the best-fit universities across USA, UK, Canada, Australia, and Germany.",
-    },
-    {
-      question: "What is the success rate for admissions?",
-      answer:
-        "We have a 92% success rate for our students getting into their top 3 university choices, with dedicated support throughout the application process.",
-    },
-    {
-      question: "How long does the admission process take?",
-      answer:
-        "Typically 2-4 weeks from document submission to university response. We ensure your application is processed as quickly as possible with all requirements met.",
-    },
-  ],
   "loan-assistance": [
     {
       question: "What is the minimum loan amount?",
@@ -75,33 +46,6 @@ const allFaqs = {
         "Some banks offer loans without co-applicants for students with strong profiles or admits to top universities. Contact us to check your eligibility.",
     },
   ],
-  "visa-assistance": [
-    {
-      question: "What visa services do you provide?",
-      answer:
-        "Complete visa application support including document preparation, interview coaching, financial documentation, and submission assistance for all major countries.",
-    },
-    {
-      question: "How much does visa assistance cost?",
-      answer:
-        "Visa assistance is included free when you avail our education loan services. Standalone visa support packages are also available.",
-    },
-    {
-      question: "What is your visa success rate?",
-      answer:
-        "We maintain a 98% visa success rate with proper documentation and interview preparation. Our experts have helped over 5,000 students get their student visas.",
-    },
-    {
-      question: "How early should I apply for a visa?",
-      answer:
-        "We recommend starting the visa process 3-4 months before your course start date. This allows time for any additional documentation requests.",
-    },
-    {
-      question: "Do you help with visa interview preparation?",
-      answer:
-        "Yes! We conduct mock interviews, provide common question guides, and share tips specific to your destination country's visa requirements.",
-    },
-  ],
   "money-transfer": [
     {
       question: "How do I send money abroad for tuition?",
@@ -132,7 +76,7 @@ const allFaqs = {
 };
 
 const FaqSection = () => {
-  const [activeCategory, setActiveCategory] = useState("admission-support");
+  const [activeCategory, setActiveCategory] = useState("loan-assistance");
   const [openItem, setOpenItem] = useState(0);
   const sectionRef = useRef();
 

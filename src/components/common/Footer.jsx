@@ -77,39 +77,6 @@ export default function Footer() {
             </nav>
           </div>
 
-          {/* Products Section */}
-          <div>
-            <h3 className="text-base md:text-lg font-bold mb-3 md:mb-4">
-              Products
-            </h3>
-            <nav className="space-y-2">
-              <Link
-                href="/pages/loans"
-                className="block text-sm md:text-base text-gray-300 hover:text-[#FF7A00] transition-colors"
-              >
-                Loans
-              </Link>
-              <Link
-                href="/pages/transfers"
-                className="block text-sm md:text-base text-gray-300 hover:text-[#FF7A00] transition-colors"
-              >
-                Transfers
-              </Link>
-              <Link
-                href="/pages/education"
-                className="block text-sm md:text-base text-gray-300 hover:text-[#FF7A00] transition-colors"
-              >
-                Education
-              </Link>
-              <Link
-                href="/pages/business"
-                className="block text-sm md:text-base text-gray-300 hover:text-[#FF7A00] transition-colors"
-              >
-                Business
-              </Link>
-            </nav>
-          </div>
-
           {/* Support Section */}
           <div>
             <h3 className="text-base md:text-lg font-bold mb-3 md:mb-4">
@@ -141,23 +108,6 @@ export default function Footer() {
                 Terms
               </Link>
             </nav>
-          </div>
-
-          {/* Newsletter Section */}
-          <div className="col-span-2 md:col-span-2">
-            <form className="space-y-2">
-              <input
-                type="email"
-                placeholder="Your email"
-                className="w-full px-3 py-2 text-sm rounded-lg bg-[#2a2236] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FF7A00] border border-gray-700"
-              />
-              <button
-                type="submit"
-                className="w-full bg-[#FF7A00] hover:bg-[#e86c30] text-white font-semibold py-2 px-4 text-sm rounded-lg transition-colors duration-300"
-              >
-                Subscribe
-              </button>
-            </form>
           </div>
         </div>
 
