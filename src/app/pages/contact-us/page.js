@@ -237,13 +237,6 @@ export default function ContactUs() {
                   </div>
                 ))}
               </div>
-
-              {/* Map placeholder */}
-              <div className="mt-6 h-[200px] rounded-2xl overflow-hidden bg-gradient-to-br from-[#45267F]/10 to-[#FF7A00]/10 border border-[#E8E8E8] flex items-center justify-center">
-                <p className="text-[#666] text-sm">
-                  🗺️ Interactive Map Coming Soon
-                </p>
-              </div>
             </div>
 
             {/* Right - Form */}

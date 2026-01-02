@@ -4,24 +4,27 @@ const BASE_URL = "https://loan.remitout.com";
 const now = new Date();
 
 export default function sitemap() {
-  return [
-    {
-      url: `${BASE_URL}/`,
-      lastModified: now,
-      changeFrequency: "weekly",
-      priority: 1.0,
-    },
-    {
-      url: `${BASE_URL}/privacy-policy`,
-      lastModified: now,
-      changeFrequency: "yearly",
-      priority: 0.3,
-    },
-    {
-      url: `${BASE_URL}/terms-of-use`,
-      lastModified: now,
-      changeFrequency: "yearly",
-      priority: 0.3,
-    },
+  const routes = [
+    "",
+    "/pages/about",
+    "/pages/blog",
+    "/pages/business",
+    "/pages/careers",
+    "/pages/contact",
+    "/pages/contact-us",
+    "/pages/education",
+    "/pages/faq",
+    "/pages/help",
+    "/pages/loans",
+    "/pages/privacy-policy",
+    "/pages/terms-of-use",
+    "/pages/transfers",
   ];
+
+  return routes.map((route) => ({
+    url: `${BASE_URL}${route}`,
+    lastModified: now,
+    changeFrequency: route === "" ? "weekly" : "monthly",
+    priority: route === "" ? 1.0 : 0.8,
+  }));
 }
