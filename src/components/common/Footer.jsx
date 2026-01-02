@@ -1,5 +1,13 @@
 import Link from "next/link";
-import { Mail, Phone, MapPin, Instagram, Facebook, Linkedin, Github } from "lucide-react";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Instagram,
+  Facebook,
+  Linkedin,
+  Github,
+} from "lucide-react";
 
 export default function Footer() {
   // Static footer content
@@ -10,13 +18,26 @@ export default function Footer() {
   };
 
   const socialLinks = [
-    { icon: Instagram, href: "https://instagram.com/remitout", label: "Instagram" },
-    { icon: Facebook, href: "https://facebook.com/remitout", label: "Facebook" },
-    { icon: Linkedin, href: "https://linkedin.com/company/remitout", label: "LinkedIn" },
+    {
+      icon: Instagram,
+      href: "https://instagram.com/remitout",
+      label: "Instagram",
+    },
+    {
+      icon: Facebook,
+      href: "https://facebook.com/remitout",
+      label: "Facebook",
+    },
+    {
+      icon: Linkedin,
+      href: "https://linkedin.com/company/remitout",
+      label: "LinkedIn",
+    },
     { icon: Github, href: "https://github.com/remitout", label: "GitHub" },
   ];
 
-  const gmailLink = (email) => `https://mail.google.com/mail/?view=cm&fs=1&to=${email}`;
+  const gmailLink = (email) =>
+    `https://mail.google.com/mail/?view=cm&fs=1&to=${email}`;
 
   return (
     <footer className="bg-[#1a1428] text-white">
@@ -25,18 +46,32 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-8 mb-8">
           {/* Company Section */}
           <div>
-            <h3 className="text-base md:text-lg font-bold mb-3 md:mb-4">Company</h3>
+            <h3 className="text-base md:text-lg font-bold mb-3 md:mb-4">
+              Company
+            </h3>
             <nav className="space-y-2">
-              <Link href="/pages/about" className="block text-sm md:text-base text-gray-300 hover:text-[#FF7A00] transition-colors">
+              <Link
+                href="/pages/about"
+                className="block text-sm md:text-base text-gray-300 hover:text-[#FF7A00] transition-colors"
+              >
                 About Us
               </Link>
-              <Link href="/pages/careers" className="block text-sm md:text-base text-gray-300 hover:text-[#FF7A00] transition-colors">
+              <Link
+                href="/pages/careers"
+                className="block text-sm md:text-base text-gray-300 hover:text-[#FF7A00] transition-colors"
+              >
                 Careers
               </Link>
-              <Link href="/pages/blog" className="block text-sm md:text-base text-gray-300 hover:text-[#FF7A00] transition-colors">
+              <Link
+                href="/pages/blog"
+                className="block text-sm md:text-base text-gray-300 hover:text-[#FF7A00] transition-colors"
+              >
                 Blog
               </Link>
-              <Link href="/pages/contact" className="block text-sm md:text-base text-gray-300 hover:text-[#FF7A00] transition-colors">
+              <Link
+                href="/pages/contact-us"
+                className="block text-sm md:text-base text-gray-300 hover:text-[#FF7A00] transition-colors"
+              >
                 Contact
               </Link>
             </nav>
@@ -44,18 +79,32 @@ export default function Footer() {
 
           {/* Products Section */}
           <div>
-            <h3 className="text-base md:text-lg font-bold mb-3 md:mb-4">Products</h3>
+            <h3 className="text-base md:text-lg font-bold mb-3 md:mb-4">
+              Products
+            </h3>
             <nav className="space-y-2">
-              <Link href="/pages/loans" className="block text-sm md:text-base text-gray-300 hover:text-[#FF7A00] transition-colors">
+              <Link
+                href="/pages/loans"
+                className="block text-sm md:text-base text-gray-300 hover:text-[#FF7A00] transition-colors"
+              >
                 Loans
               </Link>
-              <Link href="/pages/transfers" className="block text-sm md:text-base text-gray-300 hover:text-[#FF7A00] transition-colors">
+              <Link
+                href="/pages/transfers"
+                className="block text-sm md:text-base text-gray-300 hover:text-[#FF7A00] transition-colors"
+              >
                 Transfers
               </Link>
-              <Link href="/pages/education" className="block text-sm md:text-base text-gray-300 hover:text-[#FF7A00] transition-colors">
+              <Link
+                href="/pages/education"
+                className="block text-sm md:text-base text-gray-300 hover:text-[#FF7A00] transition-colors"
+              >
                 Education
               </Link>
-              <Link href="/pages/business" className="block text-sm md:text-base text-gray-300 hover:text-[#FF7A00] transition-colors">
+              <Link
+                href="/pages/business"
+                className="block text-sm md:text-base text-gray-300 hover:text-[#FF7A00] transition-colors"
+              >
                 Business
               </Link>
             </nav>
@@ -63,18 +112,32 @@ export default function Footer() {
 
           {/* Support Section */}
           <div>
-            <h3 className="text-base md:text-lg font-bold mb-3 md:mb-4">Support</h3>
+            <h3 className="text-base md:text-lg font-bold mb-3 md:mb-4">
+              Support
+            </h3>
             <nav className="space-y-2">
-              <Link href="/pages/help" className="block text-sm md:text-base text-gray-300 hover:text-[#FF7A00] transition-colors">
+              <Link
+                href="/pages/help"
+                className="block text-sm md:text-base text-gray-300 hover:text-[#FF7A00] transition-colors"
+              >
                 Help Center
               </Link>
-              <Link href="/pages/faq" className="block text-sm md:text-base text-gray-300 hover:text-[#FF7A00] transition-colors">
+              <Link
+                href="/pages/faq"
+                className="block text-sm md:text-base text-gray-300 hover:text-[#FF7A00] transition-colors"
+              >
                 FAQ
               </Link>
-              <Link href="/privacy-policy" className="block text-sm md:text-base text-gray-300 hover:text-[#FF7A00] transition-colors">
+              <Link
+                href="/pages/privacy-policy"
+                className="block text-sm md:text-base text-gray-300 hover:text-[#FF7A00] transition-colors"
+              >
                 Privacy
               </Link>
-              <Link href="/terms-of-use" className="block text-sm md:text-base text-gray-300 hover:text-[#FF7A00] transition-colors">
+              <Link
+                href="/pages/terms-of-use"
+                className="block text-sm md:text-base text-gray-300 hover:text-[#FF7A00] transition-colors"
+              >
                 Terms
               </Link>
             </nav>
@@ -105,19 +168,27 @@ export default function Footer() {
             <div className="space-y-2 text-sm md:text-base">
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4 md:w-5 md:h-5 text-[#FF7A00] flex-shrink-0" />
-                <a href={`mailto:${footerContent.email}`} className="text-gray-300 hover:text-[#FF7A00] transition-colors">
+                <a
+                  href={`mailto:${footerContent.email}`}
+                  className="text-gray-300 hover:text-[#FF7A00] transition-colors"
+                >
                   {footerContent.email}
                 </a>
               </div>
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4 md:w-5 md:h-5 text-[#FF7A00] flex-shrink-0" />
-                <a href={`tel:${footerContent.phone}`} className="text-gray-300 hover:text-[#FF7A00] transition-colors">
+                <a
+                  href={`tel:${footerContent.phone}`}
+                  className="text-gray-300 hover:text-[#FF7A00] transition-colors"
+                >
                   {footerContent.phone}
                 </a>
               </div>
               <div className="flex items-center gap-2">
                 <MapPin className="w-4 h-4 md:w-5 md:h-5 text-[#FF7A00] flex-shrink-0" />
-                <span className="text-gray-300">{footerContent.officeAddress}</span>
+                <span className="text-gray-300">
+                  {footerContent.officeAddress}
+                </span>
               </div>
             </div>
 

@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { FaArrowRight } from "react-icons/fa";
@@ -11,6 +11,54 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function ContactSection() {
   const sectionRef = useRef();
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+    acceptTerms: false,
+  });
+  const [status, setStatus] = useState(null); // null, "submitting", "success", "error"
+
+  const handleChange = (e) => {
+    const value =
+      e.target.type === "checkbox" ? e.target.checked : e.target.value;
+    setFormData({ ...formData, [e.target.name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus("submitting");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY,
+          ...formData,
+        }),
+      });
+      const result = await response.json();
+      if (result.success) {
+        setStatus("success");
+        setFormData({
+          name: "",
+          email: "",
+          message: "",
+          acceptTerms: false,
+        });
+        setTimeout(() => setStatus(null), 5000);
+      } else {
+        setStatus("error");
+      }
+    } catch (error) {
+      console.log(error);
+      setStatus("error");
+    }
+  };
 
   useGSAP(
     () => {
@@ -113,7 +161,11 @@ export default function ContactSection() {
 
             {/* Right - Form */}
             <div className="lg:w-[55%] p-8 md:p-10 lg:p-12">
-              <form className="contact-form space-y-5" noValidate>
+              <form
+                className="contact-form space-y-5"
+                onSubmit={handleSubmit}
+                noValidate
+              >
                 <div className="contact-form-field opacity-0">
                   <label
                     htmlFor="name"
@@ -125,9 +177,11 @@ export default function ContactSection() {
                     id="name"
                     name="name"
                     type="text"
+                    value={formData.name}
+                    onChange={handleChange}
                     placeholder="Enter your full name"
                     required
-                    className="w-full px-4 py-3.5 bg-[#FAFAFA] border border-[#E8E8E8] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#FF7A00]/20 focus:border-[#FF7A00] transition-all duration-200 text-base placeholder-[#999]"
+                    className="w-full px-4 py-3.5 bg-[#FAFAFA] border border-[#E8E8E8] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#FF7A00]/20 focus:border-[#FF7A00] transition-all duration-200 text-base placeholder-[#999] text-[#1A1A1A]"
                   />
                 </div>
 
@@ -142,9 +196,11 @@ export default function ContactSection() {
                     id="email"
                     name="email"
                     type="email"
+                    value={formData.email}
+                    onChange={handleChange}
                     placeholder="your.email@example.com"
                     required
-                    className="w-full px-4 py-3.5 bg-[#FAFAFA] border border-[#E8E8E8] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#FF7A00]/20 focus:border-[#FF7A00] transition-all duration-200 text-base placeholder-[#999]"
+                    className="w-full px-4 py-3.5 bg-[#FAFAFA] border border-[#E8E8E8] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#FF7A00]/20 focus:border-[#FF7A00] transition-all duration-200 text-base placeholder-[#999] text-[#1A1A1A]"
                   />
                 </div>
 
@@ -159,9 +215,11 @@ export default function ContactSection() {
                     id="message"
                     name="message"
                     rows={4}
+                    value={formData.message}
+                    onChange={handleChange}
                     placeholder="Tell us about your education loan or remittance needs..."
                     required
-                    className="w-full px-4 py-3.5 bg-[#FAFAFA] border border-[#E8E8E8] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#FF7A00]/20 focus:border-[#FF7A00] transition-all duration-200 text-base placeholder-[#999] resize-none"
+                    className="w-full px-4 py-3.5 bg-[#FAFAFA] border border-[#E8E8E8] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#FF7A00]/20 focus:border-[#FF7A00] transition-all duration-200 text-base placeholder-[#999] resize-none text-[#1A1A1A]"
                   />
                 </div>
 
@@ -170,6 +228,8 @@ export default function ContactSection() {
                     id="terms"
                     name="acceptTerms"
                     type="checkbox"
+                    checked={formData.acceptTerms}
+                    onChange={handleChange}
                     required
                     className="w-4 h-4 mt-1 text-[#FF7A00] border-2 border-[#E8E8E8] rounded focus:ring-[#FF7A00] focus:ring-2 cursor-pointer accent-[#FF7A00]"
                   />
@@ -196,11 +256,24 @@ export default function ContactSection() {
 
                 <button
                   type="submit"
-                  className="contact-form-field opacity-0 group w-full flex items-center justify-center gap-3 bg-[#FF7A00] hover:bg-[#E66D00] text-white text-base font-semibold py-4 px-8 rounded-xl shadow-lg shadow-orange-500/20 hover:shadow-xl hover:shadow-orange-500/30 transition-all duration-300 cursor-pointer"
+                  disabled={status === "submitting"}
+                  className="contact-form-field opacity-0 group w-full flex items-center justify-center gap-3 bg-[#FF7A00] hover:bg-[#E66D00] text-white text-base font-semibold py-4 px-8 rounded-xl shadow-lg shadow-orange-500/20 hover:shadow-xl hover:shadow-orange-500/30 transition-all duration-300 cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
                 >
-                  Send Message
-                  <FaArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                  {status === "submitting" ? "Sending..." : "Send Message"}
+                  {!status && (
+                    <FaArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                  )}
                 </button>
+                {status === "success" && (
+                  <p className="text-green-600 text-center mt-2 font-medium animate-pulse">
+                    Message sent successfully! We'll get back to you soon.
+                  </p>
+                )}
+                {status === "error" && (
+                  <p className="text-red-500 text-center mt-2 font-medium">
+                    Something went wrong. Please try again.
+                  </p>
+                )}
               </form>
             </div>
           </div>

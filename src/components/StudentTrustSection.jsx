@@ -84,6 +84,7 @@ const StudentTrustSection = () => {
   return (
     <section
       ref={sectionRef}
+      id="about"
       className="bg-gradient-to-b from-[#F8F7FC] to-white pb-20 md:pb-28 pt-20 md:pt-28 px-6 overflow-hidden"
     >
       <div className="max-w-[1200px] mx-auto">
