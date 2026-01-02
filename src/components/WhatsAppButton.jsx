@@ -2,7 +2,7 @@
 "use client";
 
 const WhatsAppButtonClient = ({
-  phoneNumber = "+919876543210",
+  phoneNumber = "+917777082755",
   prefilledMessage = "Hello, I want to inquire about education loans.",
   label = "Chat on WhatsApp",
 }) => {

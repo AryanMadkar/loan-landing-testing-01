@@ -62,14 +62,14 @@ export default function ContactUs() {
     {
       icon: FaEnvelope,
       label: "Email",
-      value: "hello@remitout.com",
-      href: "mailto:hello@remitout.com",
+      value: "support@remitout.com",
+      href: "mailto:support@remitout.com",
     },
     {
       icon: FaPhone,
       label: "Phone",
-      value: "+91 91-2212 5678",
-      href: "tel:+919122125678",
+      value: "+91 7777 0827 55",
+      href: "tel:+917777082755",
     },
     {
       icon: FaClock,
