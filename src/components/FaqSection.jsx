@@ -1,68 +1,245 @@
+"use client";
+import React, { useState, useRef } from "react";
 import { Minus, Plus } from "lucide-react";
+import { HiOutlineSparkles } from "react-icons/hi2";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const categories = [
-  { id: "admission-support", label: "ADMISSION SUPPORT" },
-  { id: "loan-assistance", label: "LOAN ASSISTANCE" },
-  { id: "visa-assistance", label: "VISA ASSISTANCE" },
-  { id: "money-transfer", label: "MONEY TRANSFER" },
+  { id: "admission-support", label: "Admission Support" },
+  { id: "loan-assistance", label: "Loan Assistance" },
+  { id: "visa-assistance", label: "Visa Assistance" },
+  { id: "money-transfer", label: "Money Transfer" },
 ];
 
-const FaqSection = () => {
-  // Static data - first category active, first FAQ open
-  const activeCategory = "admission-support";
-  const openItem = 0;
-
-  const faqs = [
+const allFaqs = {
+  "admission-support": [
     {
       question: "How do I apply for admission support?",
       answer:
         "Submit your university offer letter, academic transcripts, and SOP through our portal. Our experts review and strengthen your application within 48 hours.",
-      category: "admission-support",
     },
     {
       question: "What documents are needed for admission?",
       answer:
         "Offer letter, transcripts (10th/12th/graduation), SOP, LORs, passport, financial proof, and English proficiency scores (IELTS/TOEFL).",
-      category: "admission-support",
     },
+    {
+      question: "Do you help with university selection?",
+      answer:
+        "Yes! Our counselors analyze your profile, budget, and career goals to recommend the best-fit universities across USA, UK, Canada, Australia, and Germany.",
+    },
+    {
+      question: "What is the success rate for admissions?",
+      answer:
+        "We have a 92% success rate for our students getting into their top 3 university choices, with dedicated support throughout the application process.",
+    },
+    {
+      question: "How long does the admission process take?",
+      answer:
+        "Typically 2-4 weeks from document submission to university response. We ensure your application is processed as quickly as possible with all requirements met.",
+    },
+  ],
+  "loan-assistance": [
     {
       question: "What is the minimum loan amount?",
       answer:
         "₹5 lakhs for Indian universities, $10,000 for abroad. Maximum up to ₹1.5 crore or full course fees based on your profile.",
-      category: "loan-assistance",
     },
     {
       question: "How long does loan approval take?",
       answer:
         "24-72 hours after KYC verification. We compare rates from 20+ banks including SBI, HDFC, Axis, ICICI.",
-      category: "loan-assistance",
     },
-  ];
+    {
+      question: "What interest rates can I expect?",
+      answer:
+        "Interest rates range from 8.5% to 11.5% p.a. depending on the bank and your profile. We help you find the lowest rate available for your situation.",
+    },
+    {
+      question: "Is collateral required for education loans?",
+      answer:
+        "Loans up to ₹7.5 lakhs are typically collateral-free. For higher amounts, property or fixed deposits may be required depending on the bank.",
+    },
+    {
+      question: "What is the repayment period?",
+      answer:
+        "Repayment starts 6-12 months after course completion with a tenure of up to 15 years. We help you choose flexible EMI options that suit your career plans.",
+    },
+    {
+      question: "Can I get a loan without a co-applicant?",
+      answer:
+        "Some banks offer loans without co-applicants for students with strong profiles or admits to top universities. Contact us to check your eligibility.",
+    },
+  ],
+  "visa-assistance": [
+    {
+      question: "What visa services do you provide?",
+      answer:
+        "Complete visa application support including document preparation, interview coaching, financial documentation, and submission assistance for all major countries.",
+    },
+    {
+      question: "How much does visa assistance cost?",
+      answer:
+        "Visa assistance is included free when you avail our education loan services. Standalone visa support packages are also available.",
+    },
+    {
+      question: "What is your visa success rate?",
+      answer:
+        "We maintain a 98% visa success rate with proper documentation and interview preparation. Our experts have helped over 5,000 students get their student visas.",
+    },
+    {
+      question: "How early should I apply for a visa?",
+      answer:
+        "We recommend starting the visa process 3-4 months before your course start date. This allows time for any additional documentation requests.",
+    },
+    {
+      question: "Do you help with visa interview preparation?",
+      answer:
+        "Yes! We conduct mock interviews, provide common question guides, and share tips specific to your destination country's visa requirements.",
+    },
+  ],
+  "money-transfer": [
+    {
+      question: "How do I send money abroad for tuition?",
+      answer:
+        "Use our platform to transfer directly to your university. We handle all RBI compliance, offer best FX rates, and provide real-time tracking.",
+    },
+    {
+      question: "What are the transfer fees?",
+      answer:
+        "We charge a flat ₹500 + GST for transfers up to ₹50 lakhs. No hidden fees, no markups on exchange rates.",
+    },
+    {
+      question: "How long does a transfer take?",
+      answer:
+        "Most transfers complete within 24-48 hours. Express transfers to USA/UK universities can be done in 4-6 hours.",
+    },
+    {
+      question: "What is the maximum amount I can transfer?",
+      answer:
+        "Under LRS (Liberalized Remittance Scheme), you can transfer up to $250,000 (approx ₹2 crore) per financial year for education purposes.",
+    },
+    {
+      question: "Is the money transfer RBI compliant?",
+      answer:
+        "100% compliant with RBI guidelines. We handle all A2 form filings and provide transaction certificates for your records and tax purposes.",
+    },
+  ],
+};
 
-  const filteredFaqs = faqs.filter((faq) => faq.category === activeCategory);
+const FaqSection = () => {
+  const [activeCategory, setActiveCategory] = useState("admission-support");
+  const [openItem, setOpenItem] = useState(0);
+  const sectionRef = useRef();
+
+  const filteredFaqs = allFaqs[activeCategory] || [];
+
+  useGSAP(
+    () => {
+      if (!sectionRef.current) return;
+
+      // Header animation
+      gsap.fromTo(
+        ".faq-header",
+        { y: 40, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 75%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+
+      // Categories animation
+      gsap.fromTo(
+        ".faq-categories",
+        { y: 30, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".faq-categories",
+            start: "top 80%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+
+      // FAQ items stagger
+      gsap.fromTo(
+        ".faq-item",
+        { y: 30, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.5,
+          stagger: 0.08,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".faq-list",
+            start: "top 80%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+    },
+    { scope: sectionRef }
+  );
+
+  const handleCategoryChange = (categoryId) => {
+    setActiveCategory(categoryId);
+    setOpenItem(0);
+  };
+
+  const toggleItem = (index) => {
+    setOpenItem(openItem === index ? -1 : index);
+  };
 
   return (
-    <div className="w-full bg-white">
-      <div className="px-4  md:max-w-4xl md:mx-auto md:px-6 md:py-16">
-        <div className="text-center mb-8 md:mb-12 mt-12">
-          <h2 className="text-[32px] font-bold md:text-4xl mb-3 md:mb-4 text-black leading-tight">
-            Frequently <span className="text-[#45267F]/60 italic">Asked</span>{" "}
-            Questions
+    <div
+      ref={sectionRef}
+      id="faqs"
+      className="w-full bg-gradient-to-b from-white to-[#F8F7FC] py-20 lg:py-28"
+    >
+      <div className="px-6 max-w-3xl mx-auto">
+        {/* Header */}
+        <div className="faq-header opacity-0 text-center mb-12">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-[#E8E8E8] rounded-full shadow-sm mb-6">
+            <HiOutlineSparkles className="w-4 h-4 text-[#FF7A00]" />
+            <span className="text-[#666] text-sm font-medium">
+              Got Questions?
+            </span>
+          </div>
+          <h2 className="text-[32px] md:text-[42px] font-bold text-[#1A1A1A] tracking-[-0.02em] mb-4">
+            Frequently <span className="text-[#45267F]">Asked</span> Questions
           </h2>
-          <p className="text-[#8E8E8E] text-base text-[18px] md:text-lg">
-            We have got you covered.
+          <p className="text-[#666] text-lg">
+            We've got you covered with answers to common questions
           </p>
         </div>
 
-        <div className="mb-8 md:mb-12">
-          <div className="flex gap-2 md:flex-wrap md:justify-center md:gap-4 overflow-x-auto pb-2 hide-scrollbar">
+        {/* Categories */}
+        <div className="faq-categories opacity-0 mb-10">
+          <div className="flex gap-2 flex-wrap justify-center">
             {categories.map((category) => (
               <button
                 key={category.id}
-                className={`px-4 py-2 text-[16px] bg-[#45267f17] md:px-5 md:py-3 rounded-md border transition-all duration-200 text-sm md:text-base whitespace-nowrap flex-shrink-0 text-[#45267F] cursor-pointer ${
+                onClick={() => handleCategoryChange(category.id)}
+                className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 cursor-pointer ${
                   category.id === activeCategory
-                    ? "border-purple-500 bg-[#45267F17]/9 text-purple-700"
-                    : "border-gray-300 bg-[#45267F0A] text-[#1A1A1A]/70 hover:border-purple-500 hover:text-purple-700"
+                    ? "bg-[#45267F] text-white shadow-lg shadow-[#45267F]/20"
+                    : "bg-white text-[#666] border border-[#E8E8E8] hover:border-[#45267F]/30 hover:text-[#45267F]"
                 }`}
               >
                 {category.label}
@@ -71,36 +248,52 @@ const FaqSection = () => {
           </div>
         </div>
 
-        <div className="space-y-3 md:space-y-4">
+        {/* FAQ List */}
+        <div className="faq-list space-y-3">
           {filteredFaqs.map((item, index) => {
             const isOpen = openItem === index;
             return (
               <div
                 key={index}
-                className="border border-gray-200 bg-[#F7F7FB] rounded-lg overflow-hidden"
+                className="faq-item opacity-0 bg-white border border-[#E8E8E8] rounded-xl overflow-hidden hover:shadow-md transition-shadow duration-300"
               >
-                <button className="w-full px-4 py-4 md:px-6 md:py-5 text-left flex items-start justify-between hover:bg-gray-50/50 transition-colors duration-200 cursor-pointer">
-                  <span className="text-[#363636] text-[18px] font-medium text-base md:text-lg pr-3 md:pr-4 leading-tight md:leading-[21px] md:tracking-[-1px] capitalize">
+                <button
+                  onClick={() => toggleItem(index)}
+                  className="w-full px-6 py-5 text-left flex items-center justify-between hover:bg-[#FAFAFA] transition-colors duration-200 cursor-pointer"
+                >
+                  <span className="text-[#1A1A1A] font-medium text-base pr-4">
                     {item.question}
                   </span>
-                  <div className="flex-shrink-0 mt-1 md:mt-0">
+                  <div
+                    className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${
+                      isOpen ? "bg-[#45267F]" : "bg-[#F5F5F5]"
+                    }`}
+                  >
                     {isOpen ? (
-                      <Minus className="w-5 h-5 text-[#6F25CE]" />
+                      <Minus
+                        className={`w-4 h-4 ${
+                          isOpen ? "text-white" : "text-[#45267F]"
+                        }`}
+                      />
                     ) : (
-                      <Plus className="w-5 h-5 text-[#6F25CE]" />
+                      <Plus
+                        className={`w-4 h-4 ${
+                          isOpen ? "text-white" : "text-[#45267F]"
+                        }`}
+                      />
                     )}
                   </div>
                 </button>
 
                 <div
-                  className={`grid transition-all duration-500 ease-in-out ${
+                  className={`grid transition-all duration-300 ease-out ${
                     isOpen
-                      ? "grid-rows-[1fr] opacity-100 pb-4 md:pb-5"
-                      : "grid-rows-[0fr] opacity-0 pb-0"
-                  } px-4 md:px-6`}
+                      ? "grid-rows-[1fr] opacity-100"
+                      : "grid-rows-[0fr] opacity-0"
+                  }`}
                 >
                   <div className="overflow-hidden">
-                    <p className="text-[#2B2B2B]/60 leading-[20px] font-normal text-[16px] text-sm md:text-base">
+                    <p className="px-6 pb-5 text-[#666] text-sm leading-relaxed">
                       {item.answer}
                     </p>
                   </div>

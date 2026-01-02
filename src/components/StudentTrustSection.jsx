@@ -1,99 +1,156 @@
-import React from "react";
+"use client";
+import React, { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { FaCheck, FaUserTie } from "react-icons/fa";
+import { FaCheck, FaArrowRight } from "react-icons/fa";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 import trustimage1 from "../../public/trust-us-1.png";
 import trustimage2 from "../../public/trust-us-2.jpg";
+
+gsap.registerPlugin(ScrollTrigger);
+
 const StudentTrustSection = () => {
+  const sectionRef = useRef();
+
+  useGSAP(
+    () => {
+      if (!sectionRef.current) return;
+
+      // Left content animation
+      gsap.fromTo(
+        ".trust-content",
+        { x: -60, opacity: 0 },
+        {
+          x: 0,
+          opacity: 1,
+          duration: 1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 70%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+
+      // Right images stagger
+      gsap.fromTo(
+        ".trust-image",
+        { scale: 0.9, opacity: 0, y: 40 },
+        {
+          scale: 1,
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          stagger: 0.2,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".trust-images",
+            start: "top 75%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+
+      // Stats card animation
+      gsap.fromTo(
+        ".trust-stat-card",
+        { scale: 0.8, opacity: 0 },
+        {
+          scale: 1,
+          opacity: 1,
+          duration: 0.6,
+          ease: "back.out(1.5)",
+          scrollTrigger: {
+            trigger: ".trust-stat-card",
+            start: "top 80%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+    },
+    { scope: sectionRef }
+  );
+
+  const features = [
+    "Instant Rate Comparison",
+    "24-Hour Approval",
+    "Zero Processing Fees",
+    "Dedicated Support",
+  ];
+
   return (
-    <section className="bg-[#F5F5FA] pb-16 md:pb-22 pt-32 md:pt-42 lg:pt-55 px-4 md:px-8">
-      <div className="max-w-7xl mx-auto lg:mx-[8%] xl:mx-[10%]">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 lg:gap-24 xl:gap-32 items-center">
+    <section
+      ref={sectionRef}
+      className="bg-gradient-to-b from-[#F8F7FC] to-white pb-20 md:pb-28 pt-20 md:pt-28 px-6 overflow-hidden"
+    >
+      <div className="max-w-[1200px] mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           {/* Left Content */}
-          <div className="space-y-6 md:space-y-8">
-            <div className="space-y-1">
-              <h2 className="text-[28px] md:text-[32px] lg:text-4xl font-semibold text-[#363636] leading-[1.2] tracking-[-0.5px] md:tracking-[-1px] capitalize md:w-[85%] lg:w-[70%]">
-                Why Choose Remitout for Your Education Loan?
+          <div className="trust-content opacity-0 space-y-8">
+            <div className="space-y-4">
+              <h2 className="text-[28px] md:text-[38px] font-bold text-[#1A1A1A] leading-[1.2] tracking-[-0.02em]">
+                Why Choose <span className="text-[#45267F]">Remitout</span> for
+                Your Education Loan?
               </h2>
-              <p className="text-[#8E8E8E] text-[15px] md:text-base font-normal leading-[1.6] max-w-lg pt-2">
+              <p className="text-[#666] text-base md:text-lg leading-relaxed max-w-lg">
                 We make getting education loans simple, fast, and transparent.
                 From comparison to disbursement, our AI-powered platform handles
-                everything seamlessly for Indian students.
+                everything seamlessly.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 bg-[#45267F0A] p-5 md:p-6">
-              <div className="flex items-center space-x-2.5 md:space-x-3">
-                <div className="flex-shrink-0">
-                  <FaCheck className="w-5 h-5 text-[#45267F]" />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-6 bg-white rounded-2xl border border-[#E8E8E8] shadow-sm">
+              {features.map((feature, idx) => (
+                <div key={idx} className="flex items-center gap-3">
+                  <div className="w-6 h-6 rounded-full bg-[#45267F]/10 flex items-center justify-center flex-shrink-0">
+                    <FaCheck className="w-3 h-3 text-[#45267F]" />
+                  </div>
+                  <span className="text-[#1A1A1A] text-sm md:text-base font-medium">
+                    {feature}
+                  </span>
                 </div>
-                <span className="text-[#45267F] text-[15px] md:text-base font-medium">
-                  Instant Rate Comparison
-                </span>
-              </div>
-              <div className="flex items-center space-x-2.5 md:space-x-3">
-                <div className="flex-shrink-0">
-                  <FaCheck className="w-5 h-5 text-[#45267F]" />
-                </div>
-                <span className="text-[#45267F] text-[15px] md:text-base font-medium">
-                  24-Hour Approval
-                </span>
-              </div>
-              <div className="flex items-center space-x-2.5 md:space-x-3">
-                <div className="flex-shrink-0">
-                  <FaCheck className="w-5 h-5 text-[#45267F]" />
-                </div>
-                <span className="text-[#45267F] text-[15px] md:text-base font-medium">
-                  Zero Processing Fees
-                </span>
-              </div>
-              <div className="flex items-center space-x-2.5 md:space-x-3">
-                <div className="flex-shrink-0">
-                  <FaCheck className="w-5 h-5 text-[#45267F]" />
-                </div>
-                <span className="text-[#45267F] text-[15px] md:text-base font-medium">
-                  Dedicated Support
-                </span>
-              </div>
+              ))}
             </div>
 
-            <div className="pt-2 md:pt-4">
-              <Link href="/pages/contact-us">
-                <button className="bg-[#FF7A00] text-white font-semibold px-6 py-2.5 text-[15px] md:text-[16px] lg:text-[18px] xl:text-[20px] rounded-sm md:rounded-lg w-full sm:w-auto sm:px-10 md:px-12 sm:py-3 cursor-pointer hover:bg-[#E66D00] transition-colors shadow-lg">
-                  Contact to know more
-                </button>
-              </Link>
-            </div>
+            <Link href="/pages/contact-us">
+              <button className="group flex items-center gap-3 px-8 py-4 bg-[#FF7A00] text-white font-semibold rounded-xl shadow-lg shadow-orange-500/20 hover:shadow-xl hover:shadow-orange-500/30 transition-all duration-300 hover:-translate-y-1">
+                Contact to Know More
+                <FaArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </button>
+            </Link>
           </div>
 
-          {/* Right Content */}
-          <div className="relative h-[380px] md:h-[420px] lg:h-[480px] xl:h-[500px] mt-8 lg:mt-0">
+          {/* Right - Images */}
+          <div className="trust-images relative h-[420px] md:h-[500px]">
             {/* Top Right Image */}
-            <div className="absolute top-0 right-0 w-48 h-48 md:w-64 md:h-60 lg:w-80 lg:h-72 xl:w-[352px] xl:h-[337px] rounded-md md:rounded-lg overflow-hidden shadow-lg z-10">
+            <div className="trust-image opacity-0 absolute top-0 right-0 w-[55%] h-[60%] rounded-2xl overflow-hidden shadow-2xl shadow-black/10 z-10">
               <Image
                 src={trustimage1}
-                alt="Top Right Feature"
+                alt="Students studying abroad"
                 fill
                 className="object-cover"
-                sizes="(max-width: 768px) 192px, (max-width: 1024px) 320px, 352px"
+                sizes="(max-width: 768px) 192px, 320px"
               />
             </div>
 
             {/* Bottom Left Image */}
-            <div className="absolute bottom-0 left-0 w-48 h-48 md:w-72 md:h-60 lg:w-96 lg:h-72 xl:w-[416px] xl:h-[337px] rounded-md md:rounded-lg overflow-hidden shadow-lg z-0">
+            <div className="trust-image opacity-0 absolute bottom-0 left-0 w-[60%] h-[60%] rounded-2xl overflow-hidden shadow-2xl shadow-black/10">
               <Image
                 src={trustimage2}
-                alt="Bottom Left Feature"
+                alt="Student with education loan approval"
                 fill
                 className="object-cover"
-                sizes="(max-width: 768px) 192px, (max-width: 1024px) 384px, 416px"
+                sizes="(max-width: 768px) 192px, 384px"
               />
             </div>
 
-            {/* Satisfaction Card */}
-            <div className="absolute top-12 md:top-8 lg:top-6 left-8 md:left-20 lg:left-28 xl:left-32 bg-white rounded-md md:rounded-xl shadow-lg p-3.5 md:p-5 lg:p-6 z-20 max-w-[140px] md:max-w-none">
+            {/* Stats Card */}
+            <div className="trust-stat-card opacity-0 absolute top-[15%] left-[20%] bg-white rounded-2xl shadow-xl shadow-black/10 p-5 z-20 border border-[#F0F0F0]">
               <div className="text-center">
-                <div className="relative w-14 h-14 md:w-18 md:h-18 lg:w-20 lg:h-20 xl:w-22 xl:h-22 mx-auto mb-2 md:mb-3">
+                <div className="relative w-16 h-16 mx-auto mb-3">
                   <svg
                     className="w-full h-full transform -rotate-90"
                     viewBox="0 0 36 36"
@@ -101,44 +158,31 @@ const StudentTrustSection = () => {
                     <path
                       d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
                       fill="none"
-                      stroke="#e5e7eb"
-                      strokeWidth="2"
+                      stroke="#E8E8E8"
+                      strokeWidth="3"
                     />
                     <path
                       d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
                       fill="none"
-                      stroke="#7c3aed"
-                      strokeWidth="2"
+                      stroke="#45267F"
+                      strokeWidth="3"
                       strokeDasharray="95 100"
+                      strokeLinecap="round"
                     />
                   </svg>
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-lg md:text-xl lg:text-2xl font-bold text-gray-900">
+                    <span className="text-xl font-bold text-[#1A1A1A]">
                       95%
                     </span>
                   </div>
                 </div>
-                <p className="text-[11px] md:text-xs lg:text-sm xl:text-base font-medium text-gray-700 leading-tight">
+                <p className="text-sm font-medium text-[#666]">
                   Customer
                   <br />
                   Satisfaction
                 </p>
               </div>
             </div>
-
-            {/* Advisor Card */}
-            {/* <div className="absolute bottom-0 md:bottom-[-10px] left-[62%] md:left-[65%] lg:left-[68%] right-2 md:right-8 lg:right-10 bg-[#45267F] shadow-[0_10px_60px_rgba(75,131,252,0.15)] px-4 py-6 md:px-5 md:py-7 lg:px-6 lg:py-8 text-white z-20 rounded-[7px] max-w-[140px] md:max-w-none">
-              <div className="text-center">
-                <div className="mx-auto mb-2 md:mb-3 bg-white/20 rounded-lg flex items-center justify-center w-fit px-2 py-1">
-                  <FaUserTie className="w-5 h-5" />
-                </div>
-                <p className="text-[11px] md:text-xs lg:text-sm font-medium leading-tight">
-                  Dedicated
-                  <br />
-                  Advisors
-                </p>
-              </div>
-            </div> */}
           </div>
         </div>
       </div>

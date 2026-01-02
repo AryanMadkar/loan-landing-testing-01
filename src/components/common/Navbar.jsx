@@ -7,7 +7,6 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useLoading } from "../../context/LoadingContext";
 
-// FIX: Import logo from public folder for better performance and reliability
 import remitoutLogo from "../../../public/remitout_logo.webp";
 
 const Navbar = () => {
@@ -47,16 +46,33 @@ const Navbar = () => {
     { scope: container, dependencies: [isFinished] }
   );
 
+  const handleSmoothScroll = (e, targetId) => {
+    e.preventDefault();
+    const element = document.getElementById(targetId);
+    if (element) {
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  };
+
+  const navLinks = [
+    { label: "Home", href: "/", isScroll: false },
+    { label: "Our Services", href: "services", isScroll: true },
+    { label: "Testimonials", href: "testimonials", isScroll: true },
+    { label: "FAQs", href: "faqs", isScroll: true },
+  ];
+
   return (
     <nav
       ref={container}
-      className="bg-white/35 shadow-[0_2px_8px_0px_#F3F0F7] backdrop-blur-md font-poppins "
+      className="bg-white/80 shadow-[0_2px_8px_0px_#F3F0F7] backdrop-blur-md font-poppins sticky top-0 z-50"
     >
       <div className="flex items-center justify-between md:px-[131px] px-4 py-4">
         {/* Logo */}
         <div className="flex items-center space-x-2 nav-logo opacity-0">
           <Link href="/">
-            {/* FIX: Using imported logo image for better optimization */}
             <Image
               src={remitoutLogo}
               alt="Remitout education loan and remittance logo"
@@ -70,36 +86,33 @@ const Navbar = () => {
 
         {/* Desktop Links */}
         <div className="hidden md:flex text-base items-center space-x-8 leading-[19.6px]">
-          <Link
-            href="/"
-            className="text-[#1A1A1A] font-medium nav-link opacity-0"
-          >
-            Home
+          {navLinks.map((link, idx) =>
+            link.isScroll ? (
+              <button
+                key={idx}
+                onClick={(e) => handleSmoothScroll(e, link.href)}
+                className="text-[#1A1A1A] font-medium nav-link opacity-0 hover:text-[#45267F] transition-colors duration-300 cursor-pointer"
+              >
+                {link.label}
+              </button>
+            ) : (
+              <Link
+                key={idx}
+                href={link.href}
+                className="text-[#1A1A1A] font-medium nav-link opacity-0 hover:text-[#45267F] transition-colors duration-300"
+              >
+                {link.label}
+              </Link>
+            )
+          )}
+          <Link href="/pages/contact-us">
+            <button className="nav-link opacity-0 px-6 py-2.5 bg-[#FF7A00] text-white font-semibold rounded-lg hover:bg-[#E66D00] transition-colors duration-300 shadow-md hover:shadow-lg">
+              Contact Us
+            </button>
           </Link>
-          <Link
-            href="/#services"
-            className="text-[#1A1A1A] font-medium nav-link opacity-0"
-          >
-            Our Services
-          </Link>
-          <Link
-            href="/#testimonials"
-            className="text-[#1A1A1A] font-medium nav-link opacity-0"
-          >
-            Testimonials
-          </Link>
-          <Link
-            href="/#faqs"
-            className="text-[#1A1A1A] font-medium nav-link opacity-0"
-          >
-            FAQs
-          </Link>
-          {/* <Link href="#Contact" className="text-[#1A1A1A] font-medium nav-link opacity-0">
-            Schedule Call
-          </Link> */}
         </div>
 
-        {/* Mobile Hamburger Button - Static/Non-functional */}
+        {/* Mobile Hamburger Button */}
         <button
           className="md:hidden text-gray-700 focus:outline-none mobile-menu-btn opacity-0"
           aria-label="Open menu"

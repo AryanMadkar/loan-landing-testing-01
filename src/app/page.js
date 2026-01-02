@@ -19,12 +19,12 @@ export default function Home() {
   return (
     <div>
       <HeroSection />
-      <WhyRemitoutSection />
+      {/* <WhyRemitoutSection /> */}
       <StudentTrustSection />
+      <ContactSection />
       <ServicesSection />
       <TestimonialCarousel />
       <FaqSection />
-      <ContactSection />
       <Footer />
       <WhatsAppButton />
     </div>

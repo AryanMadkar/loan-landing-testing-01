@@ -1,14 +1,21 @@
+"use client";
+import React, { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 
-// Import images from public folder for better performance and reliability
+gsap.registerPlugin(ScrollTrigger);
+
 import serviceImage1 from "../../public/service_section01.webp";
 import serviceImage2 from "../../public/service_section02.webp";
 import serviceImage3 from "../../public/service_section03.webp";
 import serviceImage4 from "../../public/service_section04.webp";
 
 const ServicesSection = () => {
-  // Hardcoded processed services (no API/fetch/state)
+  const sectionRef = useRef();
+
   const processedServices = [
     {
       id: "1",
@@ -21,8 +28,8 @@ const ServicesSection = () => {
       fullImageUrl: serviceImage1,
       imageAlt: "Education Loans",
       isEvenRow: true,
-      buttonLink: "/contact-us",
-      buttonText: "Contact to Know more",
+      buttonLink: "/pages/contact-us",
+      buttonText: "Learn More",
     },
     {
       id: "2",
@@ -35,8 +42,8 @@ const ServicesSection = () => {
       fullImageUrl: serviceImage2,
       imageAlt: "Overseas Remittance",
       isEvenRow: true,
-      buttonLink: "/remittance",
-      buttonText: "Contact to Know more",
+      buttonLink: "/pages/contact-us",
+      buttonText: "Learn More",
     },
     {
       id: "3",
@@ -51,8 +58,8 @@ const ServicesSection = () => {
       fullImageUrl: serviceImage3,
       imageAlt: "KYC Verification",
       isEvenRow: false,
-      buttonLink: "/kyc",
-      buttonText: "Contact to Know more",
+      buttonLink: "/pages/contact-us",
+      buttonText: "Learn More",
     },
     {
       id: "4",
@@ -65,82 +72,122 @@ const ServicesSection = () => {
       fullImageUrl: serviceImage4,
       imageAlt: "Loan Disbursement",
       isEvenRow: false,
-      buttonLink: "/disbursement",
-      buttonText: "Contact to Know more",
+      buttonLink: "/pages/contact-us",
+      buttonText: "Learn More",
     },
   ];
 
+  useGSAP(
+    () => {
+      if (!sectionRef.current) return;
+
+      // Header animation
+      gsap.fromTo(
+        ".services-header",
+        { y: 40, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 75%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+
+      // Service cards stagger animation
+      gsap.fromTo(
+        ".service-card",
+        { y: 60, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          stagger: 0.15,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".services-grid",
+            start: "top 80%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+    },
+    { scope: sectionRef }
+  );
+
   return (
-    <div className="bg-white w-full pb-0 md:pb-39">
-      <section className="py-5 md:py-16 px-4 max-w-7xl mx-auto">
+    <div
+      ref={sectionRef}
+      id="services"
+      className="bg-white w-full pb-0 md:pb-20"
+    >
+      <section className="py-16 md:py-24 px-6 max-w-[1200px] mx-auto">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-[36px] font-semibold md:text-4xl text-[#363636] mb-4">
-            Our{" "}
-            <span className="hidden text-[#45267f99] italic">Remittance</span>{" "}
-            Services
+        <div className="services-header opacity-0 text-center mb-14">
+          <h2 className="text-[32px] md:text-[42px] font-bold text-[#1A1A1A] tracking-[-0.02em] mb-4">
+            Our <span className="text-[#45267F]">Services</span>
           </h2>
-          <p className="text-[#8E8E8E] text-[18px] max-w-2xl mx-auto">
+          <p className="text-[#666] text-lg max-w-2xl mx-auto">
             Send money abroad for education, travel, medical, and more — 100%
             RBI-compliant and hassle-free.
           </p>
         </div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-auto">
+        <div className="services-grid grid grid-cols-1 md:grid-cols-2 gap-8">
           {processedServices.map((service) => (
             <div
               key={service.id}
-              className="grid grid-cols-1 md:grid-cols-2 gap-4"
+              className="service-card opacity-0 group grid grid-cols-1 md:grid-cols-2 gap-0 bg-white rounded-2xl border border-[#E8E8E8] overflow-hidden hover:shadow-xl hover:shadow-[#45267F]/5 transition-all duration-500 hover:-translate-y-1"
             >
               {/* Image */}
               <div
                 className={`${
-                  service.isEvenRow
-                    ? "order-1 md:order-1"
-                    : "order-1 md:order-2"
-                } bg-white rounded-[6px] shadow-sm border border-gray-100 flex items-center justify-center min-h-[300px]`}
+                  service.isEvenRow ? "order-1" : "order-1 md:order-2"
+                } relative h-[200px] md:h-full min-h-[280px]`}
               >
                 <Image
                   src={service.fullImageUrl}
                   alt={service.imageAlt}
-                  width={200}
-                  height={250}
-                  className="rounded-lg object-cover w-full h-full"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
               </div>
 
               {/* Content */}
               <div
                 className={`${
-                  service.isEvenRow
-                    ? "order-2 md:order-2"
-                    : "order-2 md:order-1"
-                } bg-[#F7F7FB] rounded-[10px] p-[20px] shadow-sm border border-gray-100 flex flex-col justify-center min-h-[300px]`}
+                  service.isEvenRow ? "order-2" : "order-2 md:order-1"
+                } p-6 md:p-8 flex flex-col justify-center bg-[#FAFAFA]`}
               >
-                <h3 className="text-2xl font-semibold text-[#363636] mb-4">
-                  {service.title}{" "}
-                  {service.subtitle && (
-                    <span className="text-[#45267f]/60 italic font-medium">
-                      {service.subtitle}
-                    </span>
-                  )}
+                <h3 className="text-xl md:text-2xl font-bold text-[#1A1A1A] mb-1 group-hover:text-[#45267F] transition-colors duration-300">
+                  {service.title}
                 </h3>
-                <div className="space-y-1 mb-6 flex-1">
+                {service.subtitle && (
+                  <span className="text-[#FF7A00] text-sm font-medium mb-4">
+                    {service.subtitle}
+                  </span>
+                )}
+                <div className="space-y-2 mb-6">
                   {service.description.map((desc, i) => (
-                    <p
-                      key={i}
-                      className="text-[#8E8E8E] text-base leading-relaxed"
-                    >
-                      {desc.text}
+                    <p key={i} className="text-[#666] text-sm leading-relaxed">
+                      • {desc.text}
                     </p>
                   ))}
                 </div>
                 <Link
                   href={service.buttonLink}
-                  className="flex items-center gap-2 text-[#FF7A00] font-medium text-base hover:text-[#FF7A00]/80 transition-colors cursor-pointer"
+                  className="inline-flex items-center gap-2 text-[#45267F] font-semibold text-sm hover:text-[#FF7A00] transition-colors duration-300 group/link"
                 >
                   {service.buttonText}
+                  <span className="transition-transform duration-300 group-hover/link:translate-x-1">
+                    →
+                  </span>
                 </Link>
               </div>
             </div>
