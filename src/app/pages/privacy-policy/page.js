@@ -42,7 +42,7 @@ export default function TermsOfUse() {
                 <strong>Email:</strong> support@remitout.com
               </p>
               <p className="text-xl">
-                <strong>Phone:</strong> +91 8454999327
+                <strong>Phone:</strong> +91 7777 0827 55
               </p>
             </div>
           </div>

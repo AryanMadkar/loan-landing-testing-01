@@ -46,18 +46,10 @@ export const metadata = {
   },
 };
 
-/**
- * ✅ OPTIMIZATION: Privacy Policy page component
- * - Semantic HTML structure for better SEO
- * - Proper heading hierarchy (h1 > h2)
- * - ARIA labels for accessibility
- * - Organized sections for better readability
- */
+
 export default function PrivacyPolicyPage() {
   return (
     <>
-      <Navbar />
-
       <main className="min-h-screen bg-white py-12 px-4 md:px-8">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-4xl md:text-5xl font-bold text-[#363636] mb-6">Privacy Policy</h1>
@@ -96,31 +88,6 @@ export default function PrivacyPolicyPage() {
         </div>
       </main>
 
-      <Footer />
     </>
   );
 }
-/**
- * PERFORMANCE OPTIMIZATION NOTES:
- *
- * 1. ✅ Static content - perfect for Static Site Generation (SSG)
- * 2. ✅ Semantic HTML with sections for better structure
- * 3. ✅ ARIA labels for accessibility compliance
- * 4. ✅ Proper heading hierarchy for SEO
- * 5. ✅ Dark mode support with conditional text colors
- * 6. ✅ Clickable contact links for better UX
- * 7. ✅ Address tags for semantic contact information
- * 8. ✅ ID attributes on headings for anchor linking
- */
-/**
- * PERFORMANCE OPTIMIZATION NOTES:
- *
- * 1. ✅ Static content - perfect for Static Site Generation (SSG)
- * 2. ✅ Semantic HTML with sections for better structure
- * 3. ✅ ARIA labels for accessibility compliance
- * 4. ✅ Proper heading hierarchy for SEO
- * 5. ✅ Dark mode support with conditional text colors
- * 6. ✅ Clickable contact links for better UX
- * 7. ✅ Address tags for semantic contact information
- * 8. ✅ ID attributes on headings for anchor linking
- */

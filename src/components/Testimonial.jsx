@@ -17,8 +17,7 @@ const TestimonialCarousel = () => {
       name: "Priya Sharma",
       role: "MS Student, USA",
       rating: 5,
-      avatar:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face",
+      avatar: "/avatar.webp",
     },
     {
       id: "2",
@@ -26,8 +25,7 @@ const TestimonialCarousel = () => {
       name: "Rahul Patel",
       role: "MBA Student, UK",
       rating: 5,
-      avatar:
-        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+      avatar: "/avatar1.jpg",
     },
     {
       id: "3",
@@ -35,8 +33,7 @@ const TestimonialCarousel = () => {
       name: "Anita Desai",
       role: "Engineering Student, Canada",
       rating: 5,
-      avatar:
-        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
+      avatar: "/StudentTrust01.webp",
     },
   ];
 
