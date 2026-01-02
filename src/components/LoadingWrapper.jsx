@@ -9,31 +9,38 @@ export default function LoadingWrapper({ children }) {
   const { setIsFinished } = useLoading();
 
   useEffect(() => {
+    // Check if we've already shown the loader in this session
+    const hasVisited = sessionStorage.getItem("hasVisited");
+
+    if (hasVisited) {
+      setIsLoading(false);
+      setIsFinished(true);
+      document.body.style.overflow = "unset";
+      return;
+    }
+
     const handleLoad = () => {
-      // Allow the drawing animation to finish (approx 3s)
+      // Reduce artificial delay from 3500ms to 800ms
       setTimeout(() => {
         setIsExiting(true);
-        // Signal that the animation is starting/finishing
-        // We can set isFinished either here (start of exit) or after (end of exit)
-        // User said "when i go on that page", usually meaning after the loader
+        sessionStorage.setItem("hasVisited", "true");
 
-        // Wait for the slide-up transition (1000ms in Loader.jsx)
+        // Wait for removal animation (1000ms)
         setTimeout(() => {
           setIsLoading(false);
-          setIsFinished(true); // Signal Navbar to start
+          setIsFinished(true);
           document.body.style.overflow = "unset";
         }, 1000);
-      }, 3500);
+      }, 1000);
     };
 
-    // Disable scroll while loading
     document.body.style.overflow = "hidden";
 
     if (document.readyState === "complete") {
       handleLoad();
     } else {
       window.addEventListener("load", handleLoad);
-      const timeout = setTimeout(handleLoad, 5000);
+      const timeout = setTimeout(handleLoad, 3000); // Safety fallback
       return () => {
         window.removeEventListener("load", handleLoad);
         clearTimeout(timeout);
