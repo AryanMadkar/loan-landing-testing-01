@@ -123,22 +123,22 @@ const ServicesSection = () => {
     <div
       ref={sectionRef}
       id="services"
-      className="bg-white w-full pb-0 md:pb-20"
+      className="bg-white w-full pb-0 md:pb-12 lg:pb-20"
     >
-      <section className="py-16 md:py-24 px-6 max-w-[1200px] mx-auto">
+      <section className="py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 max-w-[1200px] mx-auto">
         {/* Header */}
-        <div className="services-header opacity-0 text-center mb-14">
-          <h2 className="text-[32px] md:text-[42px] font-bold text-[#1A1A1A] tracking-[-0.02em] mb-4">
+        <div className="services-header opacity-0 text-center mb-10 sm:mb-12 md:mb-14">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#1A1A1A] tracking-[-0.02em] mb-3 sm:mb-4">
             Our <span className="text-[#45267F]">Services</span>
           </h2>
-          <p className="text-[#666] text-lg max-w-2xl mx-auto">
+          <p className="text-[#666] text-sm sm:text-base md:text-lg max-w-2xl mx-auto px-2">
             Send money abroad for education, travel, medical, and more — 100%
             RBI-compliant and hassle-free.
           </p>
         </div>
 
         {/* Services Grid */}
-        <div className="services-grid grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="services-grid grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
           {processedServices.map((service) => (
             <div
               key={service.id}
